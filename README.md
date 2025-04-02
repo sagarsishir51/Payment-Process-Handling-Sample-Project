@@ -18,6 +18,23 @@ npm run start
 npm run build && npm run start:prod
 ```
 
+## Seeding the Database
+This project includes a **seeding feature** to populate the database with initial data. Run the following command to seed the database:
+```sh
+npm run seed
+```
+
+## Database Migrations
+This project includes **TypeORM migration** support for database schema changes.
+- **Generate a new migration**:
+  ```sh
+  npm run migration:generate
+  ```
+- **Run pending migrations**:
+  ```sh
+  npm run migration:run
+  ```
+
 ## Configuration
 Environment variables are managed using `.env` files. Define required variables in `.env` or `.env.example`:
 ```env
