@@ -34,6 +34,8 @@ This project includes **TypeORM migration** support for database schema changes.
   ```sh
   npm run migration:run
   ```
+## Blog
+For more information about this project and basic Architecture explanation, visit the [Medium Blog](https://medium.com/@sagarsishir51/mastering-hexagonal-architecture-in-nestjs-a-practical-guide-ccc10ed155bf).
 
 ## Configuration
 Environment variables are managed using `.env` files. Define required variables in `.env` or `.env.example`:
