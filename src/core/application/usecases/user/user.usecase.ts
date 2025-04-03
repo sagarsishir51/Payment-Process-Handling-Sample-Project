@@ -26,31 +26,12 @@ export class UserUseCaseImpl implements UserUseCase {
     return await this.userRepository.findUser({ userId });
   }
 
-  async getUserByIdWithPrivileges(userId: User['userId']): Promise<User> {
-    await this.checkUserExistsOrFail([{ userId }]);
-
-    return await this.userRepository.findUserWithPrivileges({ userId });
-  }
-
-  async getUserPasswordById(userId: User['userId']): Promise<string> {
-    return await this.userRepository.findUserPassword({ userId });
-  }
-
   async getUserByEmail(email: User['email']): Promise<User> {
     await this.checkUserExistsOrFail([{ email }]);
 
     return await this.userRepository.findUser({ email });
   }
 
-  async getUserByEmailWithPrivileges(email: User['email']): Promise<User> {
-    await this.checkUserExistsOrFail([{ email }]);
-
-    return await this.userRepository.findUserWithPrivileges({ email });
-  }
-
-  async getUserPasswordByEmail(email: User['email']): Promise<string> {
-    return await this.userRepository.findUserPassword({ email });
-  }
 
   async createUser(data: User): Promise<User> {
     await this.roleUseCase.checkRoleExistsOrFail([data.role]);
@@ -99,10 +80,6 @@ export class UserUseCaseImpl implements UserUseCase {
       { userId },
       { ...data, password },
     );
-  }
-
-  async checkUserExists(options: Partial<User>): Promise<boolean> {
-    return await this.userRepository.userExists([options]);
   }
 
   async checkUserExistsOrFail(options: Partial<User>[]): Promise<boolean> {
