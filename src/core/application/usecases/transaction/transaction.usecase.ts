@@ -5,90 +5,50 @@ import {User} from 'src/core/domain/user/user.domain';
 import {RoleUseCase} from 'src/core/ports/in/role/role-usecase.port';
 import {UserUseCase} from 'src/core/ports/in/user/user-usecase.port';
 import {UserRepository} from 'src/core/ports/out/user/user-repository.port';
+import { TransactionUseCase } from '../../../ports/in/transaction/transaction-usecase.port';
+import { Transaction } from 'src/core/domain/transaction/transaction.domain';
+import { TransactionRepository } from '../../../ports/out/transaction/transaction-repository.port';
 
 @Injectable()
-export class UserUseCaseImpl implements UserUseCase {
+export class TransactionCaseImpl implements TransactionUseCase {
   constructor(
-    private readonly userRepository: UserRepository,
-    private readonly roleUseCase: RoleUseCase,
+    private readonly transactionRepository: TransactionRepository,
   ) {}
 
-  async getAllUsers(
-    options: Partial<User>,
+  async getAllTransactions(
+    options: Partial<Transaction>,
     filter: PaginationProps,
-  ): Promise<[User[], number]> {
-    return await this.userRepository.findAllUsers([options], filter);
+  ): Promise<[Transaction[], number]> {
+    return await this.transactionRepository.findAllTransactions([options], filter);
   }
 
-  async getUserById(userId: User['userId']): Promise<User> {
-    await this.checkUserExistsOrFail([{ userId }]);
-
-    return await this.userRepository.findUser({ userId });
+  async getTransactionById(transactionId: Transaction['transactionId']): Promise<Transaction> {
+    return await this.transactionRepository.findTransaction({ transactionId });
   }
 
-  async getUserByEmail(email: User['email']): Promise<User> {
-    await this.checkUserExistsOrFail([{ email }]);
-
-    return await this.userRepository.findUser({ email });
+  async createTransaction(data: Transaction): Promise<Transaction> {
+    return await this.transactionRepository.createTransaction(data);
   }
 
-
-  async createUser(data: User): Promise<User> {
-    await this.roleUseCase.checkRoleExistsOrFail([data.role]);
-
-    const salt = await bcrypt.genSalt(10);
-
-    const password = await bcrypt.hash(data.password, salt);
-
-    return await this.userRepository.createUser({ ...data, password });
+  async createBulkTransactions(data: Transaction[]): Promise<Transaction[]> {
+    return await this.transactionRepository.createBulkTransactions(data);
   }
-
-  async createBulkUser(data: User[]): Promise<User[]> {
-    await this.roleUseCase.checkRoleExistsOrFail(data?.map(({ role }) => role));
-
-    const users = await Promise.all(
-      data.map(async (user) => {
-        const salt = await bcrypt.genSalt(10);
-
-        const password = await bcrypt.hash(user.password, salt);
-
-        return {
-          ...user,
-          password,
-        };
-      }),
-    );
-
-    return await this.userRepository.createBulkUser(users);
-  }
-
-  async updateUserById(
+  async updateTransactionByIdAndUserId(
+    transactionId: Transaction['transactionId'],
     userId: User['userId'],
-    data: Partial<User>,
+    data: Partial<Transaction>,
   ): Promise<void> {
-    await this.checkUserExistsOrFail([{ userId }]);
-
-    if (data.role) await this.roleUseCase.checkRoleExistsOrFail([data.role]);
-
-    const salt = await bcrypt.genSalt(10);
-
-    const password = data?.password
-      ? await bcrypt.hash(data.password, salt)
-      : undefined;
-
-    return await this.userRepository.updateUser(
-      { userId },
-      { ...data, password },
-    );
+  return this.transactionRepository.updateTransaction({transactionId,userId},data)
   }
 
-  async checkUserExistsOrFail(options: Partial<User>[]): Promise<boolean> {
-    if (await this.userRepository.userExists(options)) return true;
-
-    throw new BadRequestException('User does not exist');
+  async checkTransactionExistsOrFail(
+    options: Partial<Transaction>[],
+  ): Promise<boolean> {
+    return await this.transactionRepository.transactionExists(options);
   }
 
-  async countUsers(options?: Partial<User>): Promise<number> {
-    return await this.userRepository.countUsers(options);
+  async countTransactions(options?: Partial<Transaction>): Promise<number> {
+    return await this.transactionRepository.countTransaction(options);
   }
+
 }

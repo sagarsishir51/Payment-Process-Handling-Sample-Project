@@ -11,7 +11,7 @@ export abstract class TransactionUseCase {
   abstract createTransaction(data: Transaction): Promise<Transaction>;
   abstract createBulkTransactions(data: Transaction[]): Promise<Transaction[]>;
   abstract updateTransactionByIdAndUserId(
-    id: Transaction['transactionId'],
+    transactionId: Transaction['transactionId'],
     userId: User['userId'],
     data: Partial<Transaction>,
   ): Promise<void>;
