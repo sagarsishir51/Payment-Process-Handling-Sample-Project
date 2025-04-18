@@ -23,7 +23,7 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('Hexagonal-Architecture-Demo-Project')
+    .setTitle('Payment Process Handling Sample Project')
     .setDescription('List of Apis')
     .setVersion('1.0')
     .addBearerAuth()
