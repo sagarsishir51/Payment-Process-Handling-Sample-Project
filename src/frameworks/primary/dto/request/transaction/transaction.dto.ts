@@ -1,5 +1,16 @@
 import {ApiProperty, PartialType} from '@nestjs/swagger';
-import { IsEmail, IsEmpty, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString } from 'class-validator';
+import {
+  IsDate,
+  IsEmail,
+  IsEmpty,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+  Min,
+} from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 import {QueryDto} from '../query.dto';
 import {USER_STATUS} from 'src/common/enums/user/user.enum';
@@ -21,12 +32,12 @@ export class QueryTransactionDto extends QueryDto {
 }
 
 export class CreateTransactionDto {
-  @ApiProperty()
+  @ApiProperty({enum: TRANSACTION_STATUS,required: false})
   @IsEnum(TRANSACTION_STATUS)
   @IsOptional()
   status?: TRANSACTION_STATUS;
 
-  @ApiProperty()
+  @ApiProperty({ enum: PAYMENT_PROVIDER })
   @IsEnum(PAYMENT_PROVIDER)
   paymentProvider: PAYMENT_PROVIDER;
 
@@ -41,10 +52,13 @@ export class CreateTransactionDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @Min(1, { message: 'Amount must be greater than 0' })
   amount: number;
 
   @ApiProperty()
   @IsNotEmpty()
+  @Type(() => Date)
+  @IsDate()
   date: Date;
 }
 

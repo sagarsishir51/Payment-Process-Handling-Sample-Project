@@ -23,8 +23,11 @@ export class Transaction {
     remarks: z.string().nullish(),
     paymentProviderId: z.string().nullish(),
     amount: z.number(),
-    date: z.date().default(new Date()),
-    User: z.intersection(z.instanceof(User), z.object({ userId: z.number() })),
+    date: z.date(),
+    user: z.intersection(
+      z.instanceof(User),
+      z.object({ userId: z.string().uuid() }),
+    ),
   });
 
   static create(createTransactionProps: CreateTransactionProps) {

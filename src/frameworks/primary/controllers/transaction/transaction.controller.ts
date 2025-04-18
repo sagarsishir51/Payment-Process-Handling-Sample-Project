@@ -31,12 +31,12 @@ export class TransactionController {
   async findAll(@Query() queryTransactionDto: QueryTransactionDto) {
     const { page, size, status,paymentProvider } = queryTransactionDto;
 
-    const [users, count] = await this.transactionUseCase.getAllTransactions(
+    const [transactions, count] = await this.transactionUseCase.getAllTransactions(
       { status,paymentProvider },
       queryTransactionDto,
     );
 
-    const data = users.map((user) => new TransactionResponseDto(user));
+    const data = transactions.map((transaction) => new TransactionResponseDto(transaction));
 
     return new ResponseDto('Transactions Fetched', data, {
       count,
