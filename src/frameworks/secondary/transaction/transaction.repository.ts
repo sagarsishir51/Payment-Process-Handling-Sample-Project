@@ -19,9 +19,7 @@ export class TransactionRepositoryImpl implements TransactionRepository {
     filter: PaginationProps,
   ): Promise<[Transaction[], number]> {
     const baseCondition = (options: Partial<Transaction>) => [
-      { userName: ILike(`%${filter?.search || ''}%`), ...options },
-      { email: ILike(`%${filter?.search || ''}%`), ...options },
-      { phone: ILike(`%${filter?.search || ''}%`), ...options },
+      { remarks: ILike(`%${filter?.search || ''}%`), ...options }
     ];
 
     const condition: FindOptionsWhere<Transaction>[] = options?.flatMap((opt) =>
