@@ -1,11 +1,7 @@
 import {Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post, Query,} from '@nestjs/common';
 import {ApiBearerAuth, ApiOperation, ApiTags} from '@nestjs/swagger';
-import {ApiCustomResponse, ApiPaginatedResponse, ResponseDto,} from '../../dto/response/response.dto';
-import {UserResponseDto} from '../../dto/response/user/user.dto';
-import {CreateUserDto, QueryUserDto, UpdateUserDto,} from '../../dto/request/user/user.dto';
-import {UserUseCase} from 'src/core/ports/in/user/user-usecase.port';
+import {ResponseDto,} from '../../dto/response/response.dto';
 import {User} from 'src/core/domain/user/user.domain';
-import {Role} from 'src/core/domain/role/role.domain';
 import {Privileges} from '../../decorators/privilege.decorator';
 import {PRIVILEGE_SUBNAME} from 'src/common/enums/privilege/privilege.enum';
 import {Transactional} from "typeorm-transactional";
@@ -27,7 +23,6 @@ export class TransactionController {
 
   @Get()
   @ApiOperation({ summary: 'Get all transactions' })
-  @ApiPaginatedResponse(UserResponseDto)
   async findAll(@Query() queryTransactionDto: QueryTransactionDto) {
     const { page, size, status,paymentProvider } = queryTransactionDto;
 
@@ -47,10 +42,9 @@ export class TransactionController {
 
   @Get(':transactionId')
   @ApiOperation({ summary: 'Get transaction by id' })
-  @ApiCustomResponse(UserResponseDto)
   async findOne(@Param('transactionId', ParseUUIDPipe) transactionId: number) {
     return new ResponseDto(
-      'User Fetched',
+      'Transaction Fetched',
       new TransactionResponseDto(await this.transactionUseCase.getTransactionById(transactionId)),
     );
   }
@@ -74,6 +68,6 @@ export class TransactionController {
     @Body() updateTransactionDto: UpdateTransactionDto,
   ) {
     await this.transactionUseCase.updateTransactionByIdAndUserId(transactionId,user?.userId, { ...updateTransactionDto });
-    return new ResponseDto('User Updated');
+    return new ResponseDto('Transaction Updated');
   }
 }
