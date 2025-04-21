@@ -5,6 +5,9 @@ export type AppConfig = {
   nodeEnv: string;
   frontendUrl: string;
   backendUrl: string;
+  paymentSuccessUrl:string;
+  paymentFailureUrl:string;
+
 };
 
 export const appConfig = registerAs<Partial<AppConfig>>('app', () => ({
@@ -12,4 +15,6 @@ export const appConfig = registerAs<Partial<AppConfig>>('app', () => ({
   nodeEnv: process.env.NODE_ENV,
   frontendUrl: process.env.FRONTEND_URL,
   backendUrl: process.env.BACKEND_URL,
+  paymentSuccessUrl:process.env.PAYMENT_SUCCESS_URL,
+  paymentFailureUrl:process.env.PAYMENT_FAILURE_URL,
 }));

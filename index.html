@@ -1,0 +1,33 @@
+<!--<body>-->
+<!--<form action="https://uat.esewa.com.np/epay/main" method="POST">-->
+<!--    <input name="tAmt" type="hidden" value="10">-->
+<!--    <input name="amt" type="hidden" value="10">-->
+<!--    <input name="txAmt" type="hidden" value="0">-->
+<!--    <input name="psc" type="hidden" value="0">-->
+<!--    <input name="pdc" type="hidden" value="0">-->
+<!--    <input name="scd" type="hidden" value="NP-ES-DALLO">-->
+<!--    <input name="pid" type="hidden" value="37">-->
+<!--    <input name="su" type="hidden" value="http://localhost:3005?q=su">-->
+<!--    <input name="fu" type="hidden" value="http://localhost:3005?q=fu">-->
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
+<!--</body>-->
+
+<body>
+<form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
+    <input id="amount" name="amount" required type="text" value="1">
+    <input id="tax_amount" name="tax_amount" required type="text" value="0">
+    <input id="total_amount" name="total_amount" required type="text" value="1">
+    <input id="transaction_uuid" name="transaction_uuid" required type="text" value="TEST_ID24">
+    <input id="product_code" name="product_code" required type="text" value="EPAYTEST">
+    <input id="product_service_charge" name="product_service_charge" required type="text" value="0">
+    <input id="product_delivery_charge" name="product_delivery_charge" required type="text" value="0">
+    <input id="success_url" name="success_url" required type="text" value="http://localhost:5000/">
+    <input id="failure_url" name="failure_url" required type="text" value="http://localhost:3000/">
+    <input id="signed_field_names" name="signed_field_names" required type="text"
+           value="total_amount,transaction_uuid,product_code">
+    <input id="signature" name="signature" required type="text"
+           value="ZCyudIsfkZ4w8lUO2ANCTf1CtVvTuELtaH9xg+P/HRU=">
+    <input type="submit" value="Submit">
+</form>
+</body>

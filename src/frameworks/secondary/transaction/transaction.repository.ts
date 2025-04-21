@@ -67,13 +67,13 @@ export class TransactionRepositoryImpl implements TransactionRepository {
   }
 
   async updateTransaction(
-    options: { transactionId: number; userId: string },
+    options: Partial<Transaction>,
     data: Partial<Transaction>,
   ): Promise<void> {
-    await this.transactionRepository.update({transactionId:options?.transactionId,user:{userId:options?.userId}}, data);
+    await this.transactionRepository.update(options, data);
   }
 
-  async transactionExists(options: Partial<Transaction>[]): Promise<boolean> {
+  async transactionExists(options: Partial<Transaction>): Promise<boolean> {
     return await this.transactionRepository.existsBy(options);
   }
 

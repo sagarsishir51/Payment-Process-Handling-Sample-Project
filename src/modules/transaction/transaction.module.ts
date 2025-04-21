@@ -10,13 +10,15 @@ import { TransactionUseCase } from '../../core/ports/in/transaction/transaction-
 import { TransactionCaseImpl } from '../../core/application/usecases/transaction/transaction.usecase';
 import { TransactionRepository } from '../../core/ports/out/transaction/transaction-repository.port';
 import { TransactionRepositoryImpl } from '../../frameworks/secondary/transaction/transaction.repository';
+import { PaymentModule } from '../payment/payment.module';
 
 @Global()
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       TransactionEntity
-    ])
+    ]),
+    PaymentModule
   ],
   providers: [
     {

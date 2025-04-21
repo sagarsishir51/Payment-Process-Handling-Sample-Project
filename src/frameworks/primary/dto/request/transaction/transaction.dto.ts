@@ -62,5 +62,11 @@ export class CreateTransactionDto {
   date: Date;
 }
 
-export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {
+export class UpdateTransactionDto {
+  @ApiProperty()
+  @IsOptional()
+  encodedData: string;
+  @ApiProperty()
+  @IsOptional()
+  pidx: string;
 }

@@ -10,9 +10,9 @@ export abstract class TransactionRepository {
   abstract createTransaction(data: Transaction): Promise<Transaction>;
   abstract createBulkTransactions(data: Transaction[]): Promise<Transaction[]>;
   abstract updateTransaction(
-    options: { transactionId: number; userId: string },
+    options: Partial<Transaction>,
     data: Partial<Transaction>,
   ): Promise<void>;
   abstract countTransaction(options: Partial<Transaction>): Promise<number>;
-  abstract transactionExists(options: Partial<Transaction>[]): Promise<boolean>;
+  abstract transactionExists(options: Partial<Transaction>): Promise<boolean>;
 }
