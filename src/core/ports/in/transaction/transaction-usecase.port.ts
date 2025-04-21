@@ -1,22 +1,22 @@
 import {PaginationProps} from 'src/common/types/pagination.types';
 import { Transaction } from '../../../domain/transaction/transaction.domain';
 import { User } from '../../../domain/user/user.domain';
+import { UpdateTransactionDto } from '../../../../frameworks/primary/dto/request/transaction/transaction.dto';
 
 export abstract class TransactionUseCase {
   abstract getAllTransactions(
     options: Partial<Transaction>,
     filter: PaginationProps,
   ): Promise<[Transaction[], number]>;
-  abstract getTransactionById(id: Transaction['transactionId']): Promise<Transaction>;
+  abstract getTransactionByIdAndUserId(id: Transaction['transactionId'],userId: User['userId']): Promise<Transaction>;
   abstract createTransaction(data: Transaction): Promise<Transaction>;
-  abstract createBulkTransactions(data: Transaction[]): Promise<Transaction[]>;
   abstract updateTransactionByIdAndUserId(
     transactionId: Transaction['transactionId'],
     userId: User['userId'],
-    data: Partial<Transaction>,
+    data: Transaction,
   ): Promise<void>;
   abstract checkTransactionExistsOrFail(
-    options: Partial<Transaction>[],
+    options: Partial<Transaction>,
   ): Promise<boolean | never>;
   abstract countTransactions(options?: Partial<Transaction>): Promise<number>;
 }

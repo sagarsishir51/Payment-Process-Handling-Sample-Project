@@ -17,13 +17,15 @@ import {authConfig} from './infrastructure/config/auth.config';
 import {LoggingInterceptor} from './frameworks/primary/interceptors/logging.interceptor';
 import {UploadModule} from "./modules/upload/upload.module";
 import { TransactionModule } from './modules/transaction/transaction.module';
+import { esewaConfig } from './infrastructure/config/esewa.config';
+import { khaltiConfig } from './infrastructure/config/khalti.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
-      load: [appConfig, databaseConfig, authConfig],
+      load: [appConfig, databaseConfig, authConfig,esewaConfig,khaltiConfig],
       envFilePath: ['.env'],
     }),
     ServeStaticModule.forRoot({
