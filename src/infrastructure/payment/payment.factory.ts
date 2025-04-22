@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { EsewaUseCaseImp } from '../../../core/application/usecases/payment/esewa.usecase';
-import { PAYMENT_PROVIDER } from '../../../common/enums/transaction/transaction.enum';
-import { PaymentUseCase } from '../../../core/ports/in/payment/payment-usecase.port';
-import { KhaltiUseCaseImp } from '../../../core/application/usecases/payment/khalti.usecase';
+import { EsewaUseCaseImp } from './esewa.usecase';
+import { PAYMENT_PROVIDER } from '../../common/enums/transaction/transaction.enum';
+import { PaymentUseCase } from '../../core/ports/in/payment/payment-usecase.port';
+import { KhaltiUseCaseImp } from './khalti.usecase';
 
 @Injectable()
 export class PaymentFactory {

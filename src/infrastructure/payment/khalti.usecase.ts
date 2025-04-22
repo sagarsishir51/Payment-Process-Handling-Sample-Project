@@ -1,10 +1,11 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { PaymentUseCase } from '../../../ports/in/payment/payment-usecase.port';
+import { PaymentUseCase } from '../../core/ports/in/payment/payment-usecase.port';
 import { EsewaRequestDto, EsewaService } from 'nestjs-esewa';
 import { ConfigService } from '@nestjs/config';
-import { Payment } from '../../../domain/payment/payment.domain';
+import { Payment } from '../../core/domain/payment/payment.domain';
 import { KhaltiRequestDto, KhaltiService } from 'nestjs-khalti';
-import { TRANSACTION_STATUS } from '../../../../common/enums/transaction/transaction.enum';
+import { TRANSACTION_STATUS } from '../../common/enums/transaction/transaction.enum';
+import { PaymentResponseProps, UpdatePaymentProps } from '../../core/domain/payment/payment.types';
 
 @Injectable()
 export class KhaltiUseCaseImp implements PaymentUseCase {
@@ -22,7 +23,7 @@ export class KhaltiUseCaseImp implements PaymentUseCase {
     };
     return this.khaltiService.init(khaltiRequestDto);
   }
-  async verify(data: any): Promise<any> {
+  async verify(data: UpdatePaymentProps): Promise<PaymentResponseProps> {
     const {pidx} = data;
     if (!pidx) {
       throw new BadRequestException('Data missing for validating khalti payment');

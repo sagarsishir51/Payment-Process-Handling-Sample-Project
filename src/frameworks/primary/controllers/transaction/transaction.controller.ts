@@ -24,7 +24,7 @@ import {
 import { TransactionResponseDto } from '../../dto/response/transaction/transcation.dto';
 import { Transaction } from '../../../../core/domain/transaction/transaction.domain';
 import { AuthUser } from '../../decorators/user.decorator';
-import { PaymentFactory } from '../../factory/payment.factory';
+import { PaymentFactory } from '../../../../infrastructure/payment/payment.factory';
 import { Payment } from '../../../../core/domain/payment/payment.domain';
 import { TRANSACTION_STATUS } from '../../../../common/enums/transaction/transaction.enum';
 
@@ -87,8 +87,9 @@ export class TransactionController {
       .initPayment(
         Payment.create({
           amount: transaction?.amount,
-          transactionId: 'TEST_ID' + String(transaction?.transactionId), //string is attached for making transactionId unique in test system
-        }),
+          transactionId: 'TEST_ID' + String(transaction?.transactionId),
+        //TEST_ID string is attached for making transactionId unique in test system; remove in live system
+      }),
       );
     return {
       paymentProvider: transaction?.paymentProvider,
@@ -117,10 +118,11 @@ export class TransactionController {
     }
       transaction.status = TRANSACTION_STATUS.SUCCESS;
       transaction.paymentProviderId = paymentData?.paymentProviderId;
-      return this.transactionUseCase.updateTransactionByIdAndUserId(
+      await this.transactionUseCase.updateTransactionByIdAndUserId(
         transactionId,
         user?.userId,
         transaction,
       );
+    return new ResponseDto('Transactions updated');
     }
 }

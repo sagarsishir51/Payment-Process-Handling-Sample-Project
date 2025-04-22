@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { PaymentUseCase } from '../../../ports/in/payment/payment-usecase.port';
+import { PaymentUseCase } from '../../core/ports/in/payment/payment-usecase.port';
 import { EsewaRequestDto, EsewaService } from 'nestjs-esewa';
 import { ConfigService } from '@nestjs/config';
-import { Payment } from '../../../domain/payment/payment.domain';
-import { PaymentResponseProps } from '../../../domain/payment/payment.types';
-import { TRANSACTION_STATUS } from '../../../../common/enums/transaction/transaction.enum';
+import { Payment } from '../../core/domain/payment/payment.domain';
+import { PaymentResponseProps, UpdatePaymentProps } from '../../core/domain/payment/payment.types';
+import { TRANSACTION_STATUS } from '../../common/enums/transaction/transaction.enum';
 
 @Injectable()
 export class EsewaUseCaseImp implements PaymentUseCase {
@@ -24,7 +24,7 @@ export class EsewaUseCaseImp implements PaymentUseCase {
     };
     return this.esewaService.init(esewaRequestDto);
   }
-  async verify(data: any): Promise<PaymentResponseProps> {
+  async verify(data: UpdatePaymentProps): Promise<PaymentResponseProps> {
     const {encodedData} = data;
     if (!encodedData) {
       throw new BadRequestException('Data missing for validating eSewa payment');

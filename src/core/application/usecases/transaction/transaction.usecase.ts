@@ -4,16 +4,11 @@ import { User } from 'src/core/domain/user/user.domain';
 import { TransactionUseCase } from '../../../ports/in/transaction/transaction-usecase.port';
 import { Transaction } from 'src/core/domain/transaction/transaction.domain';
 import { TransactionRepository } from '../../../ports/out/transaction/transaction-repository.port';
-import { PaymentFactory } from '../../../../frameworks/primary/factory/payment.factory';
-import { Payment } from '../../../domain/payment/payment.domain';
-import { UpdateTransactionDto } from '../../../../frameworks/primary/dto/request/transaction/transaction.dto';
-import { TRANSACTION_STATUS } from '../../../../common/enums/transaction/transaction.enum';
 
 @Injectable()
 export class TransactionCaseImpl implements TransactionUseCase {
   constructor(
     private readonly transactionRepository: TransactionRepository,
-    private readonly paymentFactory: PaymentFactory,
   ) {}
 
   async getAllTransactions(

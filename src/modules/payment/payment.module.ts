@@ -2,10 +2,10 @@ import {Global, Module} from '@nestjs/common';
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import {AllConfig} from 'src/infrastructure/config/config.type';
 import { EsewaModule } from 'nestjs-esewa';
-import { PaymentFactory } from '../../frameworks/primary/factory/payment.factory';
-import { EsewaUseCaseImp } from '../../core/application/usecases/payment/esewa.usecase';
+import { PaymentFactory } from '../../infrastructure/payment/payment.factory';
+import { EsewaUseCaseImp } from '../../infrastructure/payment/esewa.usecase';
 import { KhaltiModule } from 'nestjs-khalti';
-import { KhaltiUseCaseImp } from '../../core/application/usecases/payment/khalti.usecase';
+import { KhaltiUseCaseImp } from '../../infrastructure/payment/khalti.usecase';
 
 @Global()
 @Module({

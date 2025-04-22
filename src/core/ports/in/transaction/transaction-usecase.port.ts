@@ -1,7 +1,6 @@
 import {PaginationProps} from 'src/common/types/pagination.types';
 import { Transaction } from '../../../domain/transaction/transaction.domain';
 import { User } from '../../../domain/user/user.domain';
-import { UpdateTransactionDto } from '../../../../frameworks/primary/dto/request/transaction/transaction.dto';
 
 export abstract class TransactionUseCase {
   abstract getAllTransactions(
@@ -15,8 +14,4 @@ export abstract class TransactionUseCase {
     userId: User['userId'],
     data: Transaction,
   ): Promise<void>;
-  abstract checkTransactionExistsOrFail(
-    options: Partial<Transaction>,
-  ): Promise<boolean | never>;
-  abstract countTransactions(options?: Partial<Transaction>): Promise<number>;
 }
