@@ -48,8 +48,7 @@ This project includes **TypeORM migration** support for database schema changes.
 This project is supported by a **multi-part blog series** that walks through the concepts and implementation of **Hexagonal Architecture in NestJS**, with a focus on **online payment integration** using the **Factory Pattern**.
 
 ### 📚 Blog Parts
-- **Part 1 – Integrating Online Payment in NestJS using Factory Pattern: Project Setup, Service Layer and APIs (Part 1)** *(Coming Soon)*
-
+- **[Integrating Online Payment in NestJS using Factory Pattern: Project Setup, Service Layer and APIs (Part 1)](https://medium.com/@sagarsishir51/integrating-online-payment-in-nestjs-using-factory-pattern-project-setup-service-layer-and-apis-ec7884067de4)**
 - **Part 2 – Integrating Online Payment in NestJS using Factory Pattern: eSewa Payment (Part 2)** *(Coming Soon)*
 
 - **Part 3 – Integrating Online Payment in NestJS using Factory Pattern: Khalti Payment (Part 3)** *(Coming Soon)*
