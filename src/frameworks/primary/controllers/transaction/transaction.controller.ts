@@ -112,7 +112,7 @@ export class TransactionController {
     }
       const paymentData = await this.paymentFactory
         .create(transaction?.paymentProvider)
-        ?.verify({ ...updateTransactionDto });
+        ?.verify(updateTransactionDto);
     if(transaction?.amount !== paymentData?.totalAmount){
       throw new NotFoundException("Transaction amount miss match case. Please contact admin");
     }
