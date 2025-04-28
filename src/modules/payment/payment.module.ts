@@ -26,10 +26,7 @@ import { KhaltiUseCaseImp } from '../../infrastructure/payment/khalti.usecase';
       inject: [ConfigService],
       useFactory: (configService: ConfigService<AllConfig>) => ({
         secretKey: configService.get("khalti.secretKey", {infer: true}),
-        //optional if different key is required for EPayment flow
-        secretKeyEPayment: configService.get("khalti.secretKeyEPayment", {infer: true}),
-        paymentMode: configService.get("khalti.paymentMode", {infer: true}),
-        initiateUrlForTest: 'https://dev.khalti.com/api/v2/epayment/initiate/',
+        paymentMode: configService.get("khalti.paymentMode", {infer: true})
       })
     }),
   ],
