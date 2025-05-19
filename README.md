@@ -49,9 +49,8 @@ This project is supported by a **multi-part blog series** that walks through the
 
 ### 📚 Blog Parts
 - **[Integrating Online Payment in NestJS using Factory Pattern: Project Setup, Service Layer and APIs (Part 1)](https://medium.com/@sagarsishir51/integrating-online-payment-in-nestjs-using-factory-pattern-project-setup-service-layer-and-apis-ec7884067de4)**
-- **Part 2 – Integrating Online Payment in NestJS using Factory Pattern: eSewa Payment (Part 2)** *(Coming Soon)*
-
-- **Part 3 – Integrating Online Payment in NestJS using Factory Pattern: Khalti Payment (Part 3)** *(Coming Soon)*
+- **[Integrating Online Payment in NestJS using Factory Pattern: eSewa Payment (Part 2)](https://medium.com/@sagarsishir51/integrating-online-payment-in-nestjs-using-factory-pattern-esewa-payment-part-2-7c727a215d3b)**
+- **[Integrating Online Payment in NestJS using Factory Pattern: Khalti Payment (Part 3)](https://medium.com/@sagarsishir51/integrating-online-payment-in-nestjs-using-factory-pattern-khalti-payment-part-3-97b89e744a54)**
 
 🔔 Stay tuned! More parts will be added as the series progresses.  
 📬 Follow [@sagarsishir51](https://medium.com/@sagarsishir51) on Medium for updates.
