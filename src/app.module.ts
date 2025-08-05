@@ -19,13 +19,14 @@ import {UploadModule} from "./modules/upload/upload.module";
 import { TransactionModule } from './modules/transaction/transaction.module';
 import { esewaConfig } from './infrastructure/config/esewa.config';
 import { khaltiConfig } from './infrastructure/config/khalti.config';
+import { connectIpsConfig } from './infrastructure/config/connectIps.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
-      load: [appConfig, databaseConfig, authConfig,esewaConfig,khaltiConfig],
+      load: [appConfig, databaseConfig, authConfig,esewaConfig,khaltiConfig,connectIpsConfig],
       envFilePath: ['.env'],
     }),
     ServeStaticModule.forRoot({

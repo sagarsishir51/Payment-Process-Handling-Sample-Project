@@ -70,4 +70,12 @@ export class UpdateTransactionDto {
   @ApiProperty()
   @IsOptional()
   pidx: string;
+
+  @ApiProperty()
+  @IsOptional()
+  transactionAmount: number;
+
+  @ApiProperty()
+  @IsOptional()
+  transactionId: string;
 }
